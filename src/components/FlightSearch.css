@@ -1,0 +1,300 @@
+.flight-search {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.search-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.results-view .search-form {
+  padding: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 200px;
+  box-sizing: border-box;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.search-button {
+  background: #007bff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 20px auto 0;
+  min-width: 200px;
+  max-width: 100%;
+}
+
+.search-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.results-table-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+}
+
+.results-table th,
+.results-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.results-table th {
+  background-color: rgba(248, 249, 250, 0.9);
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.results-table tr:hover {
+  background-color: rgba(248, 249, 250, 0.9);
+}
+
+.airport-code {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.datetime {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 4px;
+}
+
+.flight-number {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 4px;
+}
+
+.loading,
+.error,
+.no-results {
+  text-align: center;
+  padding: 30px;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.loading {
+  color: #007bff;
+}
+
+.error {
+  color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .flight-search {
+    padding: 10px;
+  }
+  
+  .form-group {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+  
+  .form-row {
+    gap: 15px;
+  }
+  
+  .search-form {
+    padding: 20px;
+  }
+  
+  .search-button {
+    width: 100%;
+  }
+}
+
+.terminal {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 2px;
+}
+
+.seats-info {
+  font-size: 0.8em;
+  color: #28a745;
+  margin-top: 2px;
+}
+
+.aircraft-info {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.stops-info {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.stopover-airports {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 2px;
+}
+
+.price-cell {
+  background-color: rgba(240, 249, 255, 0.5);
+}
+
+.total-price {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #28a745;
+}
+
+.base-price {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 4px;
+}
+
+.autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-list li {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestions-list li:hover {
+  background-color: #f5f5f5;
+}
+
+.form-group input::placeholder {
+  color: #999;
+  font-size: 0.9em;
+}
+
+.flight-group {
+  display: contents;
+}
+
+.flight-group:not(:last-child) tr:last-child {
+  border-bottom: 2px solid #007bff;
+}
+
+.outbound-flight {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.return-flight {
+  background-color: rgba(240, 249, 255, 0.5);
+}
+
+.flight-type {
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 4px;
+}
+
+.results-table tr:hover.outbound-flight {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.results-table tr:hover.return-flight {
+  background-color: rgba(240, 249, 255, 0.8);
+}
+
+.price-cell {
+  background-color: transparent !important;
+  vertical-align: middle;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+} 
