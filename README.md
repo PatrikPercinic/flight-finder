@@ -1,5 +1,7 @@
 # Flight-Finder Web App ✈️
 
+**Website** https://flightfinder.patrikpercinic.com/
+
 **Flight-Finder** is a React-based web application that connects to the FlightFinder API to help users search for flights and view airport information with ease.
 
 ---
