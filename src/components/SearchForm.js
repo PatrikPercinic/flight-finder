@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import config from '../config';
 
 const SearchForm = ({ onSearch }) => {
   const [formData, setFormData] = useState({
@@ -7,7 +8,7 @@ const SearchForm = ({ onSearch }) => {
     departureDate: '',
     returnDate: '',
     passengers: 1,
-    currency: 'USD'
+    currency: 'EUR'
   });
 
   const [iataData, setIataData] = useState([]);
@@ -21,7 +22,7 @@ const SearchForm = ({ onSearch }) => {
   useEffect(() => {
     const fetchIataCodes = async () => {
       try {
-        const response = await fetch('https://localhost:7094/api/Flights/iata');
+        const response = await fetch(`${config.API_BASE_URL}${config.ENDPOINTS.IATA_CODES}`);
         if (!response.ok) throw new Error('Failed to fetch IATA codes');
         const data = await response.json();
         setIataData(data.data);
@@ -34,7 +35,6 @@ const SearchForm = ({ onSearch }) => {
 
     fetchIataCodes();
 
-    // Add click event listener to handle clicks outside the form
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
         setSuggestions({ departure: [], destination: [] });
@@ -57,29 +57,34 @@ const SearchForm = ({ onSearch }) => {
     onSearch(searchData);
   };
 
+  const filterAirports = (searchTerm) => {
+    if (!searchTerm) return [];
+    
+    const searchTermLower = searchTerm.toLowerCase();
+    return iataData
+      .filter(airport => {
+        const codeMatch = airport.code.toLowerCase().includes(searchTermLower);
+        const nameMatch = airport.name.toLowerCase().includes(searchTermLower);
+        const countryMatch = airport.countryCode.toLowerCase().includes(searchTermLower);
+        return codeMatch || nameMatch || countryMatch;
+      })
+      .slice(0, 5);
+  };
+
   const handleIataInput = (e, type) => {
     const { value } = e.target;
+    const upperValue = value.toUpperCase();
+    
     setFormData(prev => ({
       ...prev,
-      [type]: value.toUpperCase()
+      [type]: upperValue
     }));
 
-    if (value.length > 0) {
-      const filtered = iataData.filter(airport => 
-        airport.code.toLowerCase().includes(value.toLowerCase()) ||
-        airport.name.toLowerCase().includes(value.toLowerCase())
-      ).slice(0, 5);
-
-      setSuggestions(prev => ({
-        ...prev,
-        [type === 'departureAirport' ? 'departure' : 'destination']: filtered
-      }));
-    } else {
-      setSuggestions(prev => ({
-        ...prev,
-        [type === 'departureAirport' ? 'departure' : 'destination']: []
-      }));
-    }
+    const filtered = filterAirports(value);
+    setSuggestions(prev => ({
+      ...prev,
+      [type === 'departureAirport' ? 'departure' : 'destination']: filtered
+    }));
   };
 
   const handleSuggestionClick = (airport, type) => {
@@ -103,6 +108,7 @@ const SearchForm = ({ onSearch }) => {
 
   const handleKeyDown = (e, type) => {
     if (e.key === 'Enter' || e.key === 'Escape') {
+      e.preventDefault();
       setSuggestions(prev => ({
         ...prev,
         [type === 'departureAirport' ? 'departure' : 'destination']: []
