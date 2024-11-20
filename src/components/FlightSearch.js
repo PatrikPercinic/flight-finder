@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchForm from './SearchForm';
 import ResultsTable from './ResultsTable';
+import config from '../config';
 import './FlightSearch.css';
 
 const FlightSearch = () => {
@@ -30,7 +31,7 @@ const FlightSearch = () => {
       const queryParams = new URLSearchParams(queryParamsObj);
 
       const response = await fetch(
-        `https://localhost:7094/api/Flights/search?${queryParams.toString()}`,
+        `${config.API_BASE_URL}${config.ENDPOINTS.FLIGHTS_SEARCH}?${queryParams.toString()}`,
         {
           method: 'GET',
           headers: {
